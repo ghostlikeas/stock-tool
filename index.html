@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>股票獲利試算小工具</title>
+    <title>麻糬股票獲利試算</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,8 +12,8 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
         body {
-            background-color: #f4f6f9;
-            color: #333;
+            background-color: #fef8f3;
+            color: #3e3e3e;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,102 +22,170 @@
         }
         .container {
             background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
             width: 100%;
             max-width: 480px;
             padding: 30px;
+            border: 2px solid #ffd8a8;
         }
         h1 {
-            font-size: 24px;
-            color: #1e293b;
+            font-size: 26px;
+            color: #d9480f;
             text-align: center;
-            margin-bottom: 24px;
-            font-weight: 700;
+            margin-bottom: 5px;
+            font-weight: 800;
+        }
+        .header-section {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        /* 專屬麻糬圖片樣式 */
+        .cat-image-wrapper {
+            width: 100%;
+            max-width: 280px;
+            margin: 0 auto 15px auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(217, 72, 15, 0.1);
+            border: 3px solid #ffd8a8;
+            background-color: #fff;
+            aspect-ratio: 16 / 9; /* 完美契合圖片比例 */
+        }
+        .cat-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .subtitle {
+            font-size: 14px;
+            color: #868e96;
+            margin-top: 5px;
         }
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
         label {
             display: block;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
-            color: #475569;
-            margin-bottom: 6px;
+            color: #616161;
+            margin-bottom: 8px;
         }
-        input {
+        .input-with-icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        input, select {
             width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
+            padding: 14px 18px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
             font-size: 16px;
             transition: all 0.2s ease;
             outline: none;
+            color: #495057;
         }
-        input:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        input::placeholder {
+            color: #adb5bd;
+        }
+        input:focus, select:focus {
+            border-color: #ffd8a8;
+            box-shadow: 0 0 0 4px rgba(255, 169, 77, 0.1);
+        }
+        .input-with-icon span.paw-icon {
+            position: absolute;
+            right: 15px;
+            color: #ffd8a8;
+            font-size: 20px;
+            pointer-events: none;
         }
         .result-card {
-            background-color: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 24px;
+            background-color: #fff9f1;
+            border: 2px solid #ffd8a8;
+            border-radius: 15px;
+            padding: 22px;
+            margin-top: 25px;
+            position: relative;
+        }
+        .result-card::after {
+            content: '🐾';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 18px;
+            color: #f76707;
         }
         .result-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px dashed #e2e8f0;
+            padding: 12px 0;
+            border-bottom: 1px dashed #ffd8a8;
         }
         .result-row:last-child {
             border-bottom: none;
         }
         .result-label {
-            font-size: 14px;
-            color: #64748b;
+            font-size: 15px;
+            color: #616161;
+            font-weight: 500;
         }
         .result-value {
-            font-size: 18px;
+            font-size: 19px;
             font-weight: 700;
-            color: #0f172a;
+            color: #212529;
         }
         .profit {
-            color: #dc2626; /* 紅色獲利 */
+            color: #e8590c;
         }
         .loss {
-            color: #16a34a; /* 綠色虧損 */
+            color: #12b886;
         }
         .footer {
             text-align: center;
-            margin-top: 20px;
-            font-size: 12px;
-            color: #94a3b8;
+            margin-top: 25px;
+            font-size: 13px;
+            color: #868e96;
+            line-height: 1.6;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>股票獲利試算小工具</h1>
+    <div class="header-section">
+        <!-- 這裡會直接讀取同目錄下的 mochi.png -->
+        <div class="cat-image-wrapper">
+            <img src="mochi.png" alt="招財麻糬" onerror="this.style.display='none';">
+        </div>
+        <h1>麻糬股票獲利試算</h1>
+        <div class="subtitle">喵～麻糬幫你看看這檔能賺多少罐罐！</div>
+    </div>
     
     <div class="form-group">
         <label for="buyPrice">買進價格 (元)</label>
-        <input type="number" id="buyPrice" value="" step="any" placeholder="請輸入買入價格">
+        <div class="input-with-icon">
+            <input type="number" id="buyPrice" value="" step="any" placeholder="請輸入買入價格">
+            <span class="paw-icon">🐾</span>
+        </div>
     </div>
     
     <div class="form-group">
         <label for="sellPrice">預計賣出價格 (元)</label>
-        <input type="number" id="sellPrice" value="" step="any" placeholder="請輸入賣出價格">
+        <div class="input-with-icon">
+            <input type="number" id="sellPrice" value="" step="any" placeholder="請輸入賣出價格">
+            <span class="paw-icon">🐾</span>
+        </div>
     </div>
     
     <div class="form-group">
         <label for="shares">購買數量</label>
         <div style="display: flex; gap: 10px; width: 100%;">
             <input type="number" id="quantity" value="1" style="flex: 2;">
-            <select id="unit" style="flex: 1; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; outline: none; background: white;">
+            <select id="unit" style="flex: 1; padding: 12px; font-size: 14px; background: white; border: 2px solid #e9ecef; border-radius: 12px;">
                 <option value="1000" selected>張 (1000股)</option>
                 <option value="1">股 (零股)</option>
             </select>
@@ -126,10 +194,10 @@
 
     <div class="form-group">
         <label>手續費折扣 (台灣一般券商)</label>
-        <select id="discount" style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 16px; outline: none; background: white;">
+        <select id="discount" style="background: white;">
             <option value="1">不打折 (1.425‰)</option>
             <option value="0.6">6 折</option>
-            <option value="0.28" selected>28 折 (常見網路下單優惠)</option>
+            <option value="0.28" selected>28 折 (網路下單)</option>
             <option value="0">免手續費 (純看價差)</option>
         </select>
     </div>
@@ -145,12 +213,13 @@
         </div>
         <div class="result-row">
             <span class="result-label">預估淨獲利金額</span>
-            <span id="netProfit" class="result-value" style="font-size: 22px;">0 元</span>
+            <span id="netProfit" class="result-value profit" style="font-size: 24px;">0 元</span>
         </div>
     </div>
     
     <div class="footer">
-        手續費 0.1425% (基本低消20元) | 證交稅 0.3%
+        手續費 0.1425% (基本低消20元) | 證交稅 0.3%<br>
+        麻糬祝你每檔都大賺！🐾
     </div>
 </div>
 
@@ -173,22 +242,16 @@
             document.getElementById('roi').innerText = '0%';
             document.getElementById('netProfit').innerText = '0 元';
             document.getElementById('priceDiff').className = 'result-value';
-            document.getElementById('netProfit').className = 'result-value';
+            document.getElementById('netProfit').className = 'result-value profit';
             document.getElementById('roi').className = 'result-value';
             return;
         }
 
-        // 1. 價差
         const diff = sellPrice - buyPrice;
         const diffText = (diff >= 0 ? '+' : '') + diff.toFixed(2) + ' 元';
         document.getElementById('priceDiff').innerText = diffText;
-        if(diff >= 0) {
-            document.getElementById('priceDiff').className = 'result-value profit';
-        } else {
-            document.getElementById('priceDiff').className = 'result-value loss';
-        }
+        document.getElementById('priceDiff').className = 'result-value ' + (diff >= 0 ? 'profit' : 'loss');
 
-        // 2. 計算精準稅費
         let buyFee = Math.floor(buyPrice * totalShares * 0.001425 * discount);
         if (buyFee < 20 && discount > 0) buyFee = 20;
         const totalCost = (buyPrice * totalShares) + buyFee;
@@ -199,21 +262,14 @@
         
         const totalRevenue = (sellPrice * totalShares) - sellFee - tax;
 
-        // 3. 淨獲利與報酬率
         const netProfit = totalRevenue - totalCost;
         const roi = (netProfit / totalCost) * 100;
 
-        // 顯示淨獲利
         document.getElementById('netProfit').innerText = (netProfit >= 0 ? '+' : '') + netProfit.toLocaleString('zh-TW') + ' 元';
-        if(netProfit >= 0) {
-            document.getElementById('netProfit').className = 'result-value profit';
-            document.getElementById('roi').className = 'result-value profit';
-        } else {
-            document.getElementById('netProfit').className = 'result-value loss';
-            document.getElementById('roi').className = 'result-value loss';
-        }
+        const resultClass = netProfit >= 0 ? 'result-value profit' : 'result-value loss';
+        document.getElementById('netProfit').className = resultClass + ' profit';
+        document.getElementById('roi').className = resultClass;
 
-        // 顯示報酬率
         document.getElementById('roi').innerText = (roi >= 0 ? '+' : '') + roi.toFixed(2) + '%';
     }
 
