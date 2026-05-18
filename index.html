@@ -9,7 +9,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
         body {
             background-color: #f4f6f9;
@@ -45,11 +45,6 @@
             color: #475569;
             margin-bottom: 6px;
         }
-        .input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
         input {
             width: 100%;
             padding: 12px 16px;
@@ -62,22 +57,6 @@
         input:focus {
             border-color: #3b82f6;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-        }
-        .radio-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 4px;
-        }
-        .radio-label {
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            font-weight: normal;
-            cursor: pointer;
-        }
-        .radio-label input {
-            width: auto;
-            margin-right: 6px;
         }
         .result-card {
             background-color: #f8fafc;
@@ -106,10 +85,10 @@
             color: #0f172a;
         }
         .profit {
-            color: #dc2626; /* 台灣習慣紅色為上漲/獲利 */
+            color: #dc2626; /* 紅色獲利 */
         }
         .loss {
-            color: #16a34a; /* 綠色為下跌 */
+            color: #16a34a; /* 綠色虧損 */
         }
         .footer {
             text-align: center;
@@ -126,12 +105,12 @@
     
     <div class="form-group">
         <label for="buyPrice">買進價格 (元)</label>
-        <input type="number" id="buyPrice" value="115" step="any" placeholder="請輸入買進價格">
+        <input type="number" id="buyPrice" value="" step="any" placeholder="請輸入買入價格">
     </div>
     
     <div class="form-group">
         <label for="sellPrice">預計賣出價格 (元)</label>
-        <input type="number" id="sellPrice" value="136" step="any" placeholder="請輸入賣出價格">
+        <input type="number" id="sellPrice" value="" step="any" placeholder="請輸入賣出價格">
     </div>
     
     <div class="form-group">
@@ -193,6 +172,9 @@
             document.getElementById('priceDiff').innerText = '0 元';
             document.getElementById('roi').innerText = '0%';
             document.getElementById('netProfit').innerText = '0 元';
+            document.getElementById('priceDiff').className = 'result-value';
+            document.getElementById('netProfit').className = 'result-value';
+            document.getElementById('roi').className = 'result-value';
             return;
         }
 
@@ -207,15 +189,12 @@
         }
 
         // 2. 計算精準稅費
-        // 買進手續費 (低消 20 元)
         let buyFee = Math.floor(buyPrice * totalShares * 0.001425 * discount);
         if (buyFee < 20 && discount > 0) buyFee = 20;
         const totalCost = (buyPrice * totalShares) + buyFee;
 
-        // 賣出手續費 (低消 20 元)
         let sellFee = Math.floor(sellPrice * totalShares * 0.001425 * discount);
         if (sellFee < 20 && discount > 0) sellFee = 20;
-        // 證交稅 0.3%
         const tax = Math.floor(sellPrice * totalShares * 0.003);
         
         const totalRevenue = (sellPrice * totalShares) - sellFee - tax;
@@ -238,12 +217,10 @@
         document.getElementById('roi').innerText = (roi >= 0 ? '+' : '') + roi.toFixed(2) + '%';
     }
 
-    // 監聽所有欄位輸入
     [buyPriceInput, sellPriceInput, quantityInput, unitSelect, discountSelect].forEach(element => {
         element.addEventListener('input', calculate);
     });
 
-    // 初始計算一次
     calculate();
 </script>
 
