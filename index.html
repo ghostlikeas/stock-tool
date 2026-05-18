@@ -26,6 +26,7 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
             width: 100%;
             max-width: 480px;
+            /* 恢復四周都有 30px 的完美留白 */
             padding: 30px;
             border: 2px solid #ffd8a8;
         }
@@ -40,17 +41,14 @@
             text-align: center;
             margin-bottom: 25px;
         }
-        /* 專屬麻糬圖片樣式 */
+        /* 更新：專屬麻糬圖片樣式，無外框，享受 30px 的舒適邊距 */
         .cat-image-wrapper {
             width: 100%;
-            max-width: 280px;
-            margin: 0 auto 15px auto;
-            border-radius: 16px;
+            margin: 0 auto 20px auto;
+            border-radius: 16px; /* 圖片本身保持優雅的圓角 */
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(217, 72, 15, 0.1);
-            border: 3px solid #ffd8a8;
             background-color: #fff;
-            aspect-ratio: 16 / 9; /* 完美契合圖片比例 */
+            aspect-ratio: 16 / 9;
         }
         .cat-image-wrapper img {
             width: 100%;
@@ -157,7 +155,6 @@
 
 <div class="container">
     <div class="header-section">
-        <!-- 這裡會直接讀取同目錄下的 mochi.png -->
         <div class="cat-image-wrapper">
             <img src="mochi.png" alt="招財麻糬" onerror="this.style.display='none';">
         </div>
