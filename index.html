@@ -26,12 +26,15 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
             width: 100%;
             max-width: 480px;
-            /* 恢復四周都有 30px 的完美留白 */
-            padding: 30px;
+            padding: 0 0 30px 0;
             border: 2px solid #ffd8a8;
+            overflow: hidden;
+        }
+        .content-padding {
+            padding: 0 25px;
         }
         h1 {
-            font-size: 26px;
+            font-size: 24px;
             color: #d9480f;
             text-align: center;
             margin-bottom: 5px;
@@ -39,37 +42,69 @@
         }
         .header-section {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
         }
-        /* 更新：專屬麻糬圖片樣式，無外框，享受 30px 的舒適邊距 */
         .cat-image-wrapper {
             width: 100%;
-            margin: 0 auto 20px auto;
-            border-radius: 16px; /* 圖片本身保持優雅的圓角 */
+            margin: 0 auto 15px auto;
             overflow: hidden;
             background-color: #fff;
             aspect-ratio: 16 / 9;
+            padding: 0 25px;
+            margin-top: 25px;
         }
         .cat-image-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
+            border-radius: 16px;
         }
         .subtitle {
-            font-size: 14px;
+            font-size: 13px;
             color: #868e96;
             margin-top: 5px;
         }
-        .form-group {
+        /* 分頁標籤樣式 */
+        .tabs-menu {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #ffd8a8;
             margin-bottom: 20px;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 12px 5px;
+            text-align: center;
+            background: none;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            color: #868e96;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .tab-btn.active {
+            color: #d9480f;
+            background: #fff;
+            border-bottom: 3px solid #d9480f;
+            margin-bottom: -2px;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 15px;
         }
         label {
             display: block;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
             color: #616161;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         .input-with-icon {
             position: relative;
@@ -78,16 +113,13 @@
         }
         input, select {
             width: 100%;
-            padding: 14px 18px;
+            padding: 12px 15px;
             border: 2px solid #e9ecef;
             border-radius: 12px;
-            font-size: 16px;
+            font-size: 15px;
             transition: all 0.2s ease;
             outline: none;
             color: #495057;
-        }
-        input::placeholder {
-            color: #adb5bd;
         }
         input:focus, select:focus {
             border-color: #ffd8a8;
@@ -97,57 +129,99 @@
             position: absolute;
             right: 15px;
             color: #ffd8a8;
-            font-size: 20px;
+            font-size: 18px;
             pointer-events: none;
+        }
+        .stock-fetch-btn {
+            background: #fff3bf;
+            border: 2px solid #fab005;
+            color: #873800;
+            padding: 12px 15px;
+            border-radius: 12px;
+            margin-left: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .stock-fetch-btn:hover {
+            background: #fff3bf;
+        }
+        .action-btn {
+            width: 100%;
+            background: #ff922b;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+        .action-btn:hover {
+            background: #f76707;
         }
         .result-card {
             background-color: #fff9f1;
             border: 2px solid #ffd8a8;
             border-radius: 15px;
-            padding: 22px;
-            margin-top: 25px;
+            padding: 18px;
+            margin-top: 20px;
             position: relative;
-        }
-        .result-card::after {
-            content: '🐾';
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 18px;
-            color: #f76707;
         }
         .result-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
+            padding: 10px 0;
             border-bottom: 1px dashed #ffd8a8;
         }
         .result-row:last-child {
             border-bottom: none;
         }
         .result-label {
-            font-size: 15px;
+            font-size: 14px;
             color: #616161;
-            font-weight: 500;
         }
         .result-value {
-            font-size: 19px;
+            font-size: 18px;
             font-weight: 700;
-            color: #212529;
         }
-        .profit {
-            color: #e8590c;
+        .profit { color: #e8590c; }
+        .loss { color: #12b886; }
+        
+        /* 歷史紀錄列表樣式 */
+        .history-list {
+            margin-top: 15px;
+            max-height: 250px;
+            overflow-y: auto;
         }
-        .loss {
-            color: #12b886;
+        .history-item {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+        .history-item .del-btn {
+            background: none;
+            border: none;
+            color: #adb5bd;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .history-item .del-btn:hover { color: #fa5252; }
         .footer {
             text-align: center;
-            margin-top: 25px;
-            font-size: 13px;
+            margin-top: 20px;
+            font-size: 12px;
             color: #868e96;
-            line-height: 1.6;
+            line-height: 1.5;
         }
     </style>
 </head>
@@ -159,122 +233,307 @@
             <img src="mochi.png" alt="招財麻糬" onerror="this.style.display='none';">
         </div>
         <h1>麻糬股票獲利試算</h1>
-        <div class="subtitle">喵～麻糬幫你看看這檔能賺多少罐罐！</div>
+        <div class="subtitle">喵～麻糬今天也陪你看盤算罐罐！🐾</div>
+    </div>
+
+    <!-- 分頁選單 -->
+    <div class="tabs-menu">
+        <button class="tab-btn active" onclick="switchTab('tab1')">基礎試算</button>
+        <button class="tab-btn" onclick="switchTab('tab2')">目標價反推</button>
+        <button class="tab-btn" onclick="switchTab('tab3')">即時現價算</button>
     </div>
     
-    <div class="form-group">
-        <label for="buyPrice">買進價格 (元)</label>
-        <div class="input-with-icon">
-            <input type="number" id="buyPrice" value="" step="any" placeholder="請輸入買入價格">
-            <span class="paw-icon">🐾</span>
+    <div class="content-padding">
+        
+        <!-- 分頁 1：基礎試算 -->
+        <div id="tab1" class="tab-content active">
+            <div class="form-group">
+                <label>買進價格 (元)</label>
+                <div class="input-with-icon"><input type="number" id="t1_buy" placeholder="請輸入買入價格"><span class="paw-icon">🐾</span></div>
+            </div>
+            <div class="form-group">
+                <label>預計賣出價格 (元)</label>
+                <div class="input-with-icon"><input type="number" id="t1_sell" placeholder="請輸入賣出價格"><span class="paw-icon">🐾</span></div>
+            </div>
+            <div class="form-group">
+                <label>購買張數</label>
+                <input type="number" id="t1_qty" value="1">
+            </div>
+            <button class="action-btn" onclick="saveToHistory('tab1')">🐾 記錄這筆試算</button>
         </div>
-    </div>
-    
-    <div class="form-group">
-        <label for="sellPrice">預計賣出價格 (元)</label>
-        <div class="input-with-icon">
-            <input type="number" id="sellPrice" value="" step="any" placeholder="請輸入賣出價格">
-            <span class="paw-icon">🐾</span>
+        
+        <!-- 分頁 2：目標價反推 -->
+        <div id="tab2" class="tab-content">
+            <div class="form-group">
+                <label>買進價格 (元)</label>
+                <div class="input-with-icon"><input type="number" id="t2_buy" placeholder="請輸入買入價格"><span class="paw-icon">🐾</span></div>
+            </div>
+            <div class="form-group">
+                <label>期望報酬率 (%)</label>
+                <div class="input-with-icon"><input type="number" id="t2_target_roi" placeholder="例如輸入 20"><span class="paw-icon">📈</span></div>
+            </div>
+            <div class="form-group">
+                <label>購買張數</label>
+                <input type="number" id="t2_qty" value="1">
+            </div>
+            <div class="result-card" style="background-color: #fff5f5; border-color: #ffc9c9; margin-bottom: 10px;">
+                <div class="result-row">
+                    <span class="result-label" style="font-weight: bold; color: #c92a2a;">🎯 麻糬反推目標賣出價</span>
+                    <span id="t2_suggest_sell" class="result-value profit" style="font-size: 22px;">0 元</span>
+                </div>
+            </div>
+            <button class="action-btn" onclick="saveToHistory('tab2')">🐾 記錄反推結果</button>
         </div>
-    </div>
-    
-    <div class="form-group">
-        <label for="shares">購買數量</label>
-        <div style="display: flex; gap: 10px; width: 100%;">
-            <input type="number" id="quantity" value="1" style="flex: 2;">
-            <select id="unit" style="flex: 1; padding: 12px; font-size: 14px; background: white; border: 2px solid #e9ecef; border-radius: 12px;">
-                <option value="1000" selected>張 (1000股)</option>
-                <option value="1">股 (零股)</option>
+        
+        <!-- 分頁 3：即時現價算 -->
+        <div id="tab3" class="tab-content">
+            <div class="form-group">
+                <label>台灣股票代號</label>
+                <div style="display: flex;">
+                    <input type="text" id="t3_code" placeholder="例如: 2330 或 2412">
+                    <button class="stock-fetch-btn" onclick="fetchStockPrice()">抓取現價</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>即時買進現價 (元)</label>
+                <div class="input-with-icon"><input type="number" id="t3_buy" placeholder="點上方按鈕可自動帶入" step="any"><span class="paw-icon">💰</span></div>
+            </div>
+            <div class="form-group">
+                <label>預計賣出價格 (元)</label>
+                <div class="input-with-icon"><input type="number" id="t3_sell" placeholder="請輸入賣出價格"><span class="paw-icon">🐾</span></div>
+            </div>
+            <div class="form-group">
+                <label>購買張數</label>
+                <input type="number" id="t3_qty" value="1">
+            </div>
+            <button class="action-btn" onclick="saveToHistory('tab3')">🐾 記錄現價試算</button>
+        </div>
+
+        <!-- 共用手續費區塊 -->
+        <div class="form-group" style="margin-top: 15px;">
+            <label>手續費折扣</label>
+            <select id="global_discount">
+                <option value="1">不打折 (1.425‰)</option>
+                <option value="0.6">6 折</option>
+                <option value="0.28" selected>28 折 (網路下單)</option>
+                <option value="0">免手續費 (純看價差)</option>
             </select>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label>手續費折扣 (台灣一般券商)</label>
-        <select id="discount" style="background: white;">
-            <option value="1">不打折 (1.425‰)</option>
-            <option value="0.6">6 折</option>
-            <option value="0.28" selected>28 折 (網路下單)</option>
-            <option value="0">免手續費 (純看價差)</option>
-        </select>
-    </div>
+        <!-- 即時計算結果顯示面板 -->
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">帳面單股價差</span>
+                <span id="res_diff" class="result-value">0 元</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">精準報酬率 (含稅費)</span>
+                <span id="res_roi" class="result-value">0%</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">預估淨獲利金額</span>
+                <span id="res_net" class="result-value profit" style="font-size: 22px;">0 元</span>
+            </div>
+        </div>
 
-    <div class="result-card">
-        <div class="result-row">
-            <span class="result-label">帳面單股價差</span>
-            <span id="priceDiff" class="result-value">0 元</span>
+        <!-- 歷史紀錄（上限10筆） -->
+        <div style="margin-top: 25px;">
+            <label style="display: flex; justify-content: space-between;">
+                <span>🐾 麻糬的最近10筆記帳本</span>
+                <span style="font-size: 11px; color:#adb5bd; font-weight: normal;">自動儲存</span>
+            </label>
+            <div class="history-list" id="history_container">
+                <!-- 歷史資料會生成在此 -->
+            </div>
         </div>
-        <div class="result-row">
-            <span class="result-label">精準報酬率 (含稅費)</span>
-            <span id="roi" class="result-value">0%</span>
+        
+        <div class="footer">
+            手續費 0.1425% (低消20元) | 證交稅 0.3%<br>
+            即時現價由 網頁API 提供，祝投資順利！📈
         </div>
-        <div class="result-row">
-            <span class="result-label">預估淨獲利金額</span>
-            <span id="netProfit" class="result-value profit" style="font-size: 24px;">0 元</span>
-        </div>
-    </div>
-    
-    <div class="footer">
-        手續費 0.1425% (基本低消20元) | 證交稅 0.3%<br>
-        麻糬祝你每檔都大賺！🐾
     </div>
 </div>
 
 <script>
-    const buyPriceInput = document.getElementById('buyPrice');
-    const sellPriceInput = document.getElementById('sellPrice');
-    const quantityInput = document.getElementById('quantity');
-    const unitSelect = document.getElementById('unit');
-    const discountSelect = document.getElementById('discount');
+    let currentActiveTab = 'tab1';
+    let historyRecords = JSON.parse(localStorage.getItem('mochi_stock_history')) || [];
 
-    function calculate() {
-        const buyPrice = parseFloat(buyPriceInput.value) || 0;
-        const sellPrice = parseFloat(sellPriceInput.value) || 0;
-        const quantity = parseFloat(quantityInput.value) || 0;
-        const totalShares = quantity * parseInt(unitSelect.value);
-        const discount = parseFloat(discountSelect.value);
+    function switchTab(tabId) {
+        currentActiveTab = tabId;
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        
+        event.target.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+        globalCalculate();
+    }
 
-        if (buyPrice <= 0 || sellPrice <= 0 || totalShares <= 0) {
-            document.getElementById('priceDiff').innerText = '0 元';
-            document.getElementById('roi').innerText = '0%';
-            document.getElementById('netProfit').innerText = '0 元';
-            document.getElementById('priceDiff').className = 'result-value';
-            document.getElementById('netProfit').className = 'result-value profit';
-            document.getElementById('roi').className = 'result-value';
+    // 免費台股即時 API 抓取
+    async function fetchStockPrice() {
+        const code = document.getElementById('t3_code').value.trim();
+        if(!code) return alert('請先輸入股票代號喔！');
+        
+        const btn = document.querySelector('.stock-fetch-btn');
+        btn.innerText = '讀取中...';
+        
+        try {
+            // 使用 twstock 常用開放 API 節點
+            const response = await fetch(`https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_AVG_ALL`);
+            const data = await response.json();
+            const stock = data.find(item => item.Code === code);
+            
+            if(stock && stock.ClosingPrice) {
+                document.getElementById('t3_buy').value = parseFloat(stock.ClosingPrice);
+                alert(`成功抓取！${stock.Name} 當前現價: ${stock.ClosingPrice} 元`);
+                globalCalculate();
+            } else {
+                alert('找不到該股票現價，請檢查代號是否正確（目前僅支援上市股票）。');
+            }
+        } catch (error) {
+            alert('網路連線失敗，請稍後再試。');
+        } finally {
+            btn.innerText = '抓取現價';
+        }
+    }
+
+    function globalCalculate() {
+        let buy = 0, sell = 0, qty = 1;
+        const discount = parseFloat(document.getElementById('global_discount').value);
+
+        if (currentActiveTab === 'tab1') {
+            buy = parseFloat(document.getElementById('t1_buy').value) || 0;
+            sell = parseFloat(document.getElementById('t1_sell').value) || 0;
+            qty = parseFloat(document.getElementById('t1_qty').value) || 1;
+        } else if (currentActiveTab === 'tab2') {
+            buy = parseFloat(document.getElementById('t2_buy').value) || 0;
+            const targetRoi = parseFloat(document.getElementById('t2_target_roi').value) || 0;
+            qty = parseFloat(document.getElementById('t2_qty').value) || 1;
+            
+            if(buy > 0 && targetRoi !== 0) {
+                // 精準反推公式：考慮買進手續費、賣出手續費與證交稅
+                const tCostFactor = 1 + (0.001425 * discount);
+                const tRevFactor = 1 - (0.001425 * discount) - 0.003;
+                sell = (buy * tCostFactor * (1 + targetRoi / 100)) / tRevFactor;
+                document.getElementById('t2_suggest_sell').innerText = sell.toFixed(2) + ' 元';
+            } else {
+                document.getElementById('t2_suggest_sell').innerText = '0 元';
+                sell = 0;
+            }
+        } else if (currentActiveTab === 'tab3') {
+            buy = parseFloat(document.getElementById('t3_buy').value) || 0;
+            sell = parseFloat(document.getElementById('t3_sell').value) || 0;
+            qty = parseFloat(document.getElementById('t3_qty').value) || 1;
+        }
+
+        const totalShares = qty * 1000;
+
+        if (buy <= 0 || sell <= 0) {
+            document.getElementById('res_diff').innerText = '0 元';
+            document.getElementById('res_roi').innerText = '0%';
+            document.getElementById('res_net').innerText = '0 元';
+            document.getElementById('res_diff').className = 'result-value';
+            document.getElementById('res_net').className = 'result-value profit';
+            document.getElementById('res_roi').className = 'result-value';
             return;
         }
 
-        const diff = sellPrice - buyPrice;
-        const diffText = (diff >= 0 ? '+' : '') + diff.toFixed(2) + ' 元';
-        document.getElementById('priceDiff').innerText = diffText;
-        document.getElementById('priceDiff').className = 'result-value ' + (diff >= 0 ? 'profit' : 'loss');
+        // 核心精算
+        const diff = sell - buy;
+        document.getElementById('res_diff').innerText = (diff >= 0 ? '+' : '') + diff.toFixed(2) + ' 元';
+        document.getElementById('res_diff').className = 'result-value ' + (diff >= 0 ? 'profit' : 'loss');
 
-        let buyFee = Math.floor(buyPrice * totalShares * 0.001425 * discount);
+        let buyFee = Math.floor(buy * totalShares * 0.001425 * discount);
         if (buyFee < 20 && discount > 0) buyFee = 20;
-        const totalCost = (buyPrice * totalShares) + buyFee;
+        const totalCost = (buy * totalShares) + buyFee;
 
-        let sellFee = Math.floor(sellPrice * totalShares * 0.001425 * discount);
+        let sellFee = Math.floor(sell * totalShares * 0.001425 * discount);
         if (sellFee < 20 && discount > 0) sellFee = 20;
-        const tax = Math.floor(sellPrice * totalShares * 0.003);
-        
-        const totalRevenue = (sellPrice * totalShares) - sellFee - tax;
+        const tax = Math.floor(sell * totalShares * 0.003);
+        const totalRevenue = (sell * totalShares) - sellFee - tax;
 
         const netProfit = totalRevenue - totalCost;
         const roi = (netProfit / totalCost) * 100;
 
-        document.getElementById('netProfit').innerText = (netProfit >= 0 ? '+' : '') + netProfit.toLocaleString('zh-TW') + ' 元';
-        const resultClass = netProfit >= 0 ? 'result-value profit' : 'result-value loss';
-        document.getElementById('netProfit').className = resultClass + ' profit';
-        document.getElementById('roi').className = resultClass;
-
-        document.getElementById('roi').innerText = (roi >= 0 ? '+' : '') + roi.toFixed(2) + '%';
+        document.getElementById('res_net').innerText = (netProfit >= 0 ? '+' : '') + netProfit.toLocaleString('zh-TW') + ' 元';
+        document.getElementById('res_roi').innerText = (roi >= 0 ? '+' : '') + roi.toFixed(2) + '%';
+        
+        const stateClass = netProfit >= 0 ? 'result-value profit' : 'result-value loss';
+        document.getElementById('res_net').className = stateClass;
+        document.getElementById('res_roi').className = stateClass;
     }
 
-    [buyPriceInput, sellPriceInput, quantityInput, unitSelect, discountSelect].forEach(element => {
-        element.addEventListener('input', calculate);
+    // 儲存至歷史紀錄（上限10筆）
+    function saveToHistory(tabId) {
+        let buy = 0, sell = 0, qty = 1, name = "股票";
+        
+        if (tabId === 'tab1') {
+            buy = parseFloat(document.getElementById('t1_buy').value) || 0;
+            sell = parseFloat(document.getElementById('t1_sell').value) || 0;
+            qty = document.getElementById('t1_qty').value;
+        } else if (tabId === 'tab2') {
+            buy = parseFloat(document.getElementById('t2_buy').value) || 0;
+            sell = parseFloat(document.getElementById('t2_suggest_sell').innerText) || 0;
+            qty = document.getElementById('t2_qty').value;
+            name = "反推";
+        } else if (tabId === 'tab3') {
+            buy = parseFloat(document.getElementById('t3_buy').value) || 0;
+            sell = parseFloat(document.getElementById('t3_sell').value) || 0;
+            qty = document.getElementById('t3_qty').value;
+            const code = document.getElementById('t3_code').value.trim();
+            name = code ? `${code}` : "現價";
+        }
+
+        if(buy <= 0 || sell <= 0) return alert('數據不完整，麻糬沒辦法記帳喔！');
+
+        const netStr = document.getElementById('res_net').innerText;
+        const roiStr = document.getElementById('res_roi').innerText;
+
+        const record = {
+            id: Date.now(),
+            label: `${name} (${buy}➔${sell.toFixed(1)})`,
+            qty: `${qty}張`,
+            result: `${netStr} (${roiStr})`,
+            isProfit: !netStr.includes('-')
+        };
+
+        historyRecords.unshift(record); // 插到最前面
+        if(historyRecords.length > 10) historyRecords.pop(); // 超過10筆就刪除最後一筆
+
+        localStorage.setItem('mochi_stock_history', JSON.stringify(historyRecords));
+        renderHistory();
+    }
+
+    function deleteHistory(id) {
+        historyRecords = historyRecords.filter(r => r.id !== id);
+        localStorage.setItem('mochi_stock_history', JSON.stringify(historyRecords));
+        renderHistory();
+    }
+
+    function renderHistory() {
+        const container = document.getElementById('history_container');
+        if(historyRecords.length === 0) {
+            container.innerHTML = '<div style="text-align:center;font-size:12px;color:#adb5bd;padding:10px;">目前尚無記帳紀錄 🐾</div>';
+            return;
+        }
+        container.innerHTML = historyRecords.map(r => `
+            <div class="history-item">
+                <div>
+                    <strong>${r.label}</strong> * ${r.qty}<br>
+                    <span class="${r.isProfit ? 'profit' : 'loss'}">${r.result}</span>
+                </div>
+                <button class="del-btn" onclick="deleteHistory(${r.id})">×</button>
+            </div>
+        `).join('');
+    }
+
+    // 綁定即時監聽事件
+    const inputs = ['t1_buy', 't1_sell', 't1_qty', 't2_buy', 't2_target_roi', 't2_qty', 't3_buy', 't3_sell', 't3_qty', 'global_discount'];
+    inputs.forEach(id => {
+        document.getElementById(id).addEventListener('input', globalCalculate);
     });
 
-    calculate();
+    // 初始載入歷史紀錄
+    renderHistory();
 </script>
 
 </body>
